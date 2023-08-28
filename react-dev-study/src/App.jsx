@@ -3,33 +3,57 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+import { getImageUrl } from './utils.jsx';
 
+const Profile = ({name,profession,awardsNum,awards,src,discoverd}) => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <section className="profile">
+      <h2>{name}</h2>
+      <img
+        className="avatar"
+        src={getImageUrl(src)}
+        alt={name}
+        width={70}
+        height={70}
+      />
+      <ul>
+        <li>
+          <b>Profession: </b> 
+          {profession}
+        </li>
+        <li>
+          <b>Awards: {awardsNum} </b> 
+          {awards}
+        </li>
+        <li>
+          <b>Discovered: </b>
+          {discoverd}
+        </li>
+      </ul>
+    </section>
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <div>
+      <h1>Notable Scientists</h1>
+      <Profile 
+        name = 'Maria Skłodowska-Curie'
+        profession = 'physicist and chemist'
+        awardsNum = {4}
+        src = 'szV5sdG'
+        awards = '(Nobel Prize in Physics, Nobel Prize in Chemistry, Davy Medal, Matteucci Medal)'
+        discoverd = 'polonium (element)'
+      />
+      <Profile 
+        name = 'Katsuko Saruhashi'
+        profession = 'geochemist'
+        awardsNum = {2}
+        src = 'YfeOqp2'
+        awards = '(Miyake Prize for geochemistry, Tanaka Prize)'
+        discoverd = 'a method for measuring carbon dioxide in seawater'        
+      />
+    </div>
+  );
+}
