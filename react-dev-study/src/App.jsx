@@ -3,57 +3,48 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-import { getImageUrl } from './utils.jsx';
-
-const Profile = ({name,profession,awardsNum,awards,src,discoverd}) => {
+function Item({ name, isPacked }) {
   return (
-    <section className="profile">
-      <h2>{name}</h2>
-      <img
-        className="avatar"
-        src={getImageUrl(src)}
-        alt={name}
-        width={70}
-        height={70}
-      />
-      <ul>
-        <li>
-          <b>Profession: </b> 
-          {profession}
-        </li>
-        <li>
-          <b>Awards: {awardsNum} </b> 
-          {awards}
-        </li>
-        <li>
-          <b>Discovered: </b>
-          {discoverd}
-        </li>
-      </ul>
-    </section>
-  )
+    <li className="item">
+      {name} {isPacked ? '✔' : "❌"}
+    </li>
+  );
 }
 
-export default function App() {
+function Drink({ name }) {
+  let part,caffeine,age;
+  if(name == 'tea') {
+    part = 'leaf'
+    caffeine = '15–70 mg/cup'
+    age = '4,000+ years'
+  } else {
+    part = 'bean'
+    caffeine = '80–185 mg/cup'
+    age = '1,000+ years'
+  }
+  return (
+    <section>
+      <h1>{name}</h1>
+      <dl>
+        <dt>Part of plant</dt>
+        <dd>{part}</dd>
+        <dt>Caffeine content</dt>
+        <dd>{caffeine}</dd>
+        <dt>Age</dt>
+        <dd>{age}</dd>
+      </dl>
+    </section>
+  );
+}
+
+export default function DrinkList() {
   return (
     <div>
-      <h1>Notable Scientists</h1>
-      <Profile 
-        name = 'Maria Skłodowska-Curie'
-        profession = 'physicist and chemist'
-        awardsNum = {4}
-        src = 'szV5sdG'
-        awards = '(Nobel Prize in Physics, Nobel Prize in Chemistry, Davy Medal, Matteucci Medal)'
-        discoverd = 'polonium (element)'
-      />
-      <Profile 
-        name = 'Katsuko Saruhashi'
-        profession = 'geochemist'
-        awardsNum = {2}
-        src = 'YfeOqp2'
-        awards = '(Miyake Prize for geochemistry, Tanaka Prize)'
-        discoverd = 'a method for measuring carbon dioxide in seawater'        
-      />
+      <Drink name="tea" />
+      <Drink name="coffee" />
     </div>
   );
 }
+
+
+
